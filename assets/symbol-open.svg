@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="100%" height="100%">
+  <!-- Open circle indicator -->
+  <circle cx="39" cy="18" r="9" fill="none" stroke="#0C41C4" stroke-width="3.5"/>
+  <!-- X notehead -->
+  <line x1="26" y1="73" x2="52" y2="95" stroke="#0C41C4" stroke-width="5" stroke-linecap="round"/>
+  <line x1="26" y1="95" x2="52" y2="73" stroke="#0C41C4" stroke-width="5" stroke-linecap="round"/>
+  <!-- Stem -->
+  <rect x="52" y="24" width="4.5" height="61" fill="#220A63" rx="1"/>
+</svg>

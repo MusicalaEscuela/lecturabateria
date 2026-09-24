@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%">
+    <defs>
+      <linearGradient id="drumShellGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#220A63"/>
+        <stop offset="50%" stop-color="#5729FF"/>
+        <stop offset="100%" stop-color="#CE0071"/>
+      </linearGradient>
+      <linearGradient id="cymbalGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FDE68A"/>
+        <stop offset="35%" stop-color="#F59E0B"/>
+        <stop offset="70%" stop-color="#D97706"/>
+        <stop offset="100%" stop-color="#92400E"/>
+      </linearGradient>
+      <linearGradient id="chromeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#9CA3AF"/>
+        <stop offset="30%" stop-color="#F3F4F6"/>
+        <stop offset="60%" stop-color="#E5E7EB"/>
+        <stop offset="100%" stop-color="#6B7280"/>
+      </linearGradient>
+      <linearGradient id="headGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF"/>
+        <stop offset="70%" stop-color="#F8FAFC"/>
+        <stop offset="100%" stop-color="#E2E8F0"/>
+      </linearGradient>
+      <radialGradient id="kickHeadGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#1E1B4B"/>
+        <stop offset="70%" stop-color="#0F0C29"/>
+        <stop offset="100%" stop-color="#020014"/>
+      </radialGradient>
+      <filter id="softShadow" x="-10%" y="-10%" width="120%" height="130%">
+        <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#220A63" flood-opacity="0.2"/>
+      </filter>
+    </defs>
+
+  <rect width="240" height="240" rx="32" fill="#FBF9FE"/>
+  <!-- Snare Stand Legs & Basket -->
+  <path d="M120 170 L120 225 M120 205 L85 232 M120 205 L155 232" stroke="url(#chromeGrad)" stroke-width="4.5" stroke-linecap="round"/>
+  <path d="M85 130 L110 165 M155 130 L130 165" stroke="url(#chromeGrad)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Snare Drum Shell -->
+  <path d="M60 95 L60 145 Q120 175 180 145 L180 95 Z" fill="url(#drumShellGrad)" filter="url(#softShadow)"/>
+  <!-- Chrome Tension Lugs -->
+  <rect x="72" y="105" width="6" height="30" fill="url(#chromeGrad)" rx="2"/>
+  <rect x="117" y="112" width="6" height="32" fill="url(#chromeGrad)" rx="2"/>
+  <rect x="162" y="105" width="6" height="30" fill="url(#chromeGrad)" rx="2"/>
+  <!-- Snare Strainer Throw-off lever (Bordón) -->
+  <rect x="52" y="112" width="8" height="15" fill="#CE0071" rx="2"/>
+  <!-- Bottom Rim -->
+  <path d="M60 145 Q120 175 180 145" stroke="url(#chromeGrad)" stroke-width="6" fill="none"/>
+  <!-- Top Die-Cast Rim -->
+  <ellipse cx="120" cy="95" rx="64" ry="24" fill="url(#chromeGrad)"/>
+  <!-- Coated White Batter Head -->
+  <ellipse cx="120" cy="95" rx="58" ry="20" fill="url(#headGrad)"/>
+  <ellipse cx="120" cy="95" rx="42" ry="14" fill="none" stroke="#CBD5E1" stroke-width="1.2"/>
+  <!-- Sweet Spot Center -->
+  <ellipse cx="120" cy="95" rx="18" ry="6" fill="#FFFFFF" opacity="0.75"/>
+  <!-- Crossed Drumsticks -->
+  <g transform="rotate(-15 120 95)">
+    <line x1="50" y1="92" x2="190" y2="92" stroke="#E2B77D" stroke-width="4.5" stroke-linecap="round"/>
+    <ellipse cx="190" cy="92" rx="4" ry="2.5" fill="#D1A36B"/>
+  </g>
+</svg>

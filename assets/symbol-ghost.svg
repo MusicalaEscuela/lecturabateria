@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120" width="100%" height="100%">
+  <!-- Parentheses -->
+  <path d="M18 72 C12 80, 12 96, 18 104" fill="none" stroke="#5729FF" stroke-width="3" stroke-linecap="round"/>
+  <path d="M64 72 C70 80, 70 96, 64 104" fill="none" stroke="#5729FF" stroke-width="3" stroke-linecap="round"/>
+  <!-- Light notehead -->
+  <ellipse cx="41" cy="88" rx="15" ry="10" transform="rotate(-20 41 88)" fill="#5729FF" opacity="0.6"/>
+  <!-- Stem -->
+  <rect x="53" y="28" width="3.5" height="60" fill="#5729FF" opacity="0.7" rx="1"/>
+</svg>

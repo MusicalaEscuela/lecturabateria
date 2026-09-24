@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="100%" height="100%">
+    <defs>
+      <linearGradient id="drumShellGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#220A63"/>
+        <stop offset="50%" stop-color="#5729FF"/>
+        <stop offset="100%" stop-color="#CE0071"/>
+      </linearGradient>
+      <linearGradient id="cymbalGold" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#FDE68A"/>
+        <stop offset="35%" stop-color="#F59E0B"/>
+        <stop offset="70%" stop-color="#D97706"/>
+        <stop offset="100%" stop-color="#92400E"/>
+      </linearGradient>
+      <linearGradient id="chromeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#9CA3AF"/>
+        <stop offset="30%" stop-color="#F3F4F6"/>
+        <stop offset="60%" stop-color="#E5E7EB"/>
+        <stop offset="100%" stop-color="#6B7280"/>
+      </linearGradient>
+      <linearGradient id="headGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF"/>
+        <stop offset="70%" stop-color="#F8FAFC"/>
+        <stop offset="100%" stop-color="#E2E8F0"/>
+      </linearGradient>
+      <radialGradient id="kickHeadGrad" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#1E1B4B"/>
+        <stop offset="70%" stop-color="#0F0C29"/>
+        <stop offset="100%" stop-color="#020014"/>
+      </radialGradient>
+      <filter id="softShadow" x="-10%" y="-10%" width="120%" height="130%">
+        <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#220A63" flood-opacity="0.2"/>
+      </filter>
+    </defs>
+
+  <rect width="240" height="240" rx="32" fill="#FBF9FE"/>
+  <!-- Center Rod & Stand -->
+  <path d="M120 60 L120 220 M120 190 L85 228 M120 190 L155 228" stroke="url(#chromeGrad)" stroke-width="4.5" stroke-linecap="round"/>
+  <!-- Footboard Base -->
+  <path d="M110 220 L130 220 L126 234 L114 234 Z" fill="url(#chromeGrad)"/>
+  <!-- Lower Cymbal -->
+  <ellipse cx="120" cy="118" rx="76" ry="20" fill="#B45309" filter="url(#softShadow)"/>
+  <!-- Top Cymbal (slight gap for hi-hat feel) -->
+  <ellipse cx="120" cy="110" rx="76" ry="20" fill="url(#cymbalGold)" filter="url(#softShadow)"/>
+  <ellipse cx="120" cy="110" rx="58" ry="14" fill="none" stroke="#B45309" stroke-width="1.2" opacity="0.6"/>
+  <!-- Clutch / Tuerca de Embrague -->
+  <ellipse cx="120" cy="109" rx="16" ry="6" fill="#FDE68A"/>
+  <rect x="116" y="85" width="8" height="22" fill="url(#chromeGrad)" rx="2"/>
+  <circle cx="120" cy="92" r="5" fill="#374151"/>
+  <circle cx="120" cy="100" r="4" fill="#1F2937"/>
+  <!-- Hit Accent Stick -->
+  <line x1="165" y1="75" x2="140" y2="105" stroke="#E2B77D" stroke-width="4" stroke-linecap="round"/>
+</svg>
