@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lectura de Partitura para Batería | Musicala</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=2.0" />
+</head>
+<body>
+  <div class="app-shell">
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="brand-intro">
+        <img class="brand-logo" src="assets/musicala-logo-vertical-slogan.png" alt="Musicala - Vida, alma y música" />
+        <div>
+          <span class="eyebrow">ACADEMIA MUSICALA · BATERÍA</span>
+          <h1>Lectura de batería,<br><em>paso a paso.</em></h1>
+          <p>Aprende qué representa cada símbolo del pentagrama y practícalo con claridad visual, audio real y máxima confianza.</p>
+        </div>
+      </div>
+      <div class="topbar-aside">
+        <button id="soundToggle" class="sound-toggle-btn" aria-label="Activar o desactivar sonido">
+          <span id="soundIcon">🔊</span>
+          <span id="soundLabel">Audio activado</span>
+        </button>
+        <div class="progress-card">
+          <span>Progreso general</span>
+          <strong id="progressText">0%</strong>
+          <div class="progress-track"><div id="progressBar"></div></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-section="mapa" role="tab" aria-selected="true">
+        <span>🗺️</span> Mapa del pentagrama
+      </button>
+      <button class="tab" data-section="simbolos" role="tab" aria-selected="false">
+        <span>🎼</span> Símbolos y articulaciones
+      </button>
+      <button class="tab" data-section="practica" role="tab" aria-selected="false">
+        <span>🎯</span> Práctica interactiva
+      </button>
+    </nav>
+
+    <main>
+      <!-- SECTION 1: MAPA DEL PENTAGRAMA -->
+      <section id="mapa" class="section active" role="tabpanel">
+        <div class="section-title">
+          <span class="step">1</span>
+          <div>
+            <h2>Mapa interactivo del pentagrama</h2>
+            <p>Haz clic en cada nota de la partitura o en la batería para descubrir su sonido, posición y técnica.</p>
+          </div>
+        </div>
+
+        <div class="map-grid">
+          <!-- LEFT COLUMN: STAFF & DRUM KIT -->
+          <div class="staff-column">
+            <!-- STAFF CARD -->
+            <article class="staff-card">
+              <div class="staff-header">
+                <div class="staff-header-title">
+                  <span>🎼</span> Pentagrama estándar · Clave neutral (4/4)
+                </div>
+                <label class="staff-toggle-wrap">
+                  <input type="checkbox" id="toggleNoteNames" checked />
+                  <span>Ver nombres en las notas</span>
+                </label>
+              </div>
+
+              <!-- INTERACTIVE SVG STAFF -->
+              <div class="staff-svg-wrap">
+                <svg id="mainStaffSvg" class="staff-svg" viewBox="0 0 840 290" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Staff Guidelines Background -->
+                  <defs>
+                    <filter id="noteGlow" x="-50%" y="-50%" width="200%" height="200%">
+                      <feGaussianBlur in="SourceGraphic" stdDeviation="4"/>
+                      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+                    </filter>
+                  </defs>
+
+                  <!-- Range Indicators Labels -->
+                  <text x="750" y="32" fill="#8C83A2" font-family="'Roboto', sans-serif" font-weight="800" font-size="10.5" letter-spacing="1">AGUDOS / PLATOS</text>
+                  <text x="750" y="265" fill="#8C83A2" font-family="'Roboto', sans-serif" font-weight="800" font-size="10.5" letter-spacing="1">GRAVES / PIES</text>
+
+                  <!-- Standard 5 Staff Lines -->
+                  <g stroke="#220A63" stroke-width="2">
+                    <line x1="30" y1="70" x2="810" y2="70" id="staff-line-5" opacity="0.9"/>
+                    <line x1="30" y1="100" x2="810" y2="100" id="staff-line-4" opacity="0.9"/>
+                    <line x1="30" y1="130" x2="810" y2="130" id="staff-line-3" opacity="0.9"/>
+                    <line x1="30" y1="160" x2="810" y2="160" id="staff-line-2" opacity="0.9"/>
+                    <line x1="30" y1="190" x2="810" y2="190" id="staff-line-1" opacity="0.9"/>
+                  </g>
+
+                  <!-- Measure Bar Lines -->
+                  <line x1="30" y1="70" x2="30" y2="190" stroke="#220A63" stroke-width="3"/>
+                  <line x1="804" y1="70" x2="804" y2="190" stroke="#220A63" stroke-width="2"/>
+                  <line x1="810" y1="70" x2="810" y2="190" stroke="#220A63" stroke-width="5"/>
+
+                  <!-- Standard Percussion Clef (Neutral Clef: Two Bold Vertical Bars) -->
+                  <rect x="44" y="80" width="6" height="100" fill="#220A63" rx="1.5"/>
+                  <rect x="56" y="80" width="6" height="100" fill="#220A63" rx="1.5"/>
+
+                  <!-- Time Signature 4/4 -->
+                  <text x="82" y="122" fill="#220A63" font-family="'Roboto', sans-serif" font-weight="900" font-size="34">4</text>
+                  <text x="82" y="180" fill="#220A63" font-family="'Roboto', sans-serif" font-weight="900" font-size="34">4</text>
+
+                  <!-- NOTE 1: CRASH (x=140, y=40, Ledger line y=40, Stem UP) -->
+                  <g class="svg-note-group" data-name="Crash" tabindex="0" role="button" aria-label="Crash">
+                    <circle cx="140" cy="40" r="28" fill="#5729FF" fill-opacity="0" class="svg-note-target"/>
+                    <!-- Ledger line above staff -->
+                    <line x1="120" y1="40" x2="160" y2="40" stroke="#220A63" stroke-width="2.5"/>
+                    <!-- Stem UP -->
+                    <line x1="150" y1="40" x2="150" y2="-5" stroke="#220A63" stroke-width="3.5" stroke-linecap="round" class="svg-note-stem"/>
+                    <!-- X notehead -->
+                    <line x1="130" y1="30" x2="150" y2="50" stroke="#220A63" stroke-width="4.5" stroke-linecap="round" class="svg-note-head"/>
+                    <line x1="130" y1="50" x2="150" y2="30" stroke="#220A63" stroke-width="4.5" stroke-linecap="round" class="svg-note-head"/>
+                    <!-- Pill Tag -->
+                    <g class="note-pill-tag" transform="translate(140, 222)">
+                      <rect x="-30" y="-10" width="60" height="20" rx="10" fill="#220A63"/>
+                      <text x="0" y="4" fill="#FFFFFF" font-family="'Roboto', sans-serif" font-weight="800" font-size="10" text-anchor="middle">Crash</text>
+                    </g>
+                  </g>
+
+                  <!-- NOTE 2: RIDE (x=215, y=55, Stem UP) -->
+                  <g class="svg-note-group" data-name="Ride" tabindex="0" role="button" aria-label="Ride">
+                    <circle cx="215" cy="55" r="28" fill="#5729FF" fill-opacity="0" class="svg-note-target"/>
+                    <!-- Stem UP -->
+                    <line x1="225" y1="55" x2="225" y2="10" stroke="#220A63" stroke-width="3.5" stroke-linecap="round" class="svg-note-stem"/>
+                    <!-- X notehead -->
+                    <line x1="205" y1="45" x2="225" y2="65" stroke="#220A63" stroke-width="4.5" stroke-linecap="round" class="svg-note-head"/>
+                    <line x1="205" y1="65" x2="225" y2="45" stroke="#220A63" stroke-width="4.5" stroke-linecap="round" class="svg-note-head"/>
+                    <!-- Pill Tag -->
+                    <g class="note-pill-tag" transform="translate(215, 222)">
+                      <rect x="-26" y="-10" width="52" height="20" rx="10" fill="#220A63"/>
+                      <text x="0" y="4" fill="#FFFFFF" font-family="'Roboto', sans-serif" font-weight="800" font-size="10" text-anchor="middle">Ride</text>
+                    </g>
+                  </g>
+
+                  <!-- NOTE 3: HI-HAT (x=290, y=70 on Line 5, Stem UP) -->
+                  <g class="svg-note-group" data-name="Hi-hat" tabindex="0" role="button" aria-label="Hi-hat">
+                    <circle cx="290" cy="70" r="28" fill="#5729FF" fill-opacity="0" class="svg-note-target"/>
+                    <!-- Stem UP -->
+                    <line x1="300" y1="70" x2="300" y2="25" stroke="#220A63" stroke-width="3.5" stroke-linecap="round" class="svg-note-stem"/>
+                    <!-- X notehead -->
+                    <line x1="280" y1="60" x2="300" y2="80" stroke="#220A63" stroke-width="4.5" stroke-linecap="round" class="svg-note-head"/>
+                    <line x1="280" y1="80" x2="300" y2="60" stroke="#220A63" stroke-width="4.5" stroke-linecap="round" class="svg-note-head"/>
+                    <!-- Pill Tag -->
+                    <g class="note-pill-tag" transform="translate(290, 222)">
+                      <rect x="-28" y="-10" width="56" height="20" rx="10" fill="#220A63"/>
+                      <text x="0" y="4" fill="#FFFFFF" font-family="'Roboto', sans-serif" font-weight="800" font-size="10" text-anchor="middle">Hi-hat</text>
+                    </g>
+                  </g>
+
+                  <!-- NOTE 4: TOM AGUDO (x=365, y=85 in Space 4, Stem UP) -->
+                  <g class="svg-note-group" data-name="Tom agudo" tabindex="0" role="button" aria-label="Tom agudo">
+                    <circle cx="365" cy="85" r="28" fill="#5729FF" fill-opacity="0" class="svg-note-target"/>
+                    <!-- Stem UP -->
+                    <line x1="375" y1="85" x2="375" y2="40" stroke="#220A63" stroke-width="3.5" stroke-linecap="round" class="svg-note-stem"/>
+                    <!-- Tilted Oval Notehead -->
+                    <ellipse cx="365" cy="85" rx="13" ry="9" transform="rotate(-20 365 85)" fill="#220A63" class="svg-note-head"/>
+                    <!-- Pill Tag -->
+                    <g class="note-pill-tag" transform="translate(365, 222)">
+                      <rect x="-34" y="-10" width="68" height="20" rx="10" fill="#220A63"/>
+                      <text x="0" y="4" fill="#FFFFFF" font-family="'Roboto', sans-serif" font-weight="800" font-size="10" text-anchor="middle">Tom agudo</text>
+                    </g>
+                  </g>
+
+                  <!-- NOTE 5: TOM MEDIO (x=440, y=100 on Line 4, Stem UP) -->
+                  <g class="svg-note-group" data-name="Tom medio" tabindex="0" role="button" aria-label="Tom medio">
+                    <circle cx="440" cy="100" r="28" fill="#5729FF" fill-opacity="0" class="svg-note-target"/>
+                    <!-- Stem UP -->
+                    <line x1="450" y1="100" x2="450" y2="55" stroke="#220A63" stroke-width="3.5" stroke-linecap="round" class="svg-note-stem"/>
+                    <!-- Tilted Oval Notehead -->
+                    <ellipse cx="440" cy="100" rx="13" ry="9" transform="rotate(-20 440 100)" fill="#220A63" class="svg-note-head"/>
+                    <!-- Pill Tag -->
+                    <g class="note-pill-tag" transform="translate(440, 222)">
+                      <rect x="-34" y="-10" width="68" height="20" rx="10" fill="#220A63"/>
+                      <text x="0" y="4" fill="#FFFFFF" font-family="'Roboto', sans-serif" font-weight="800" font-size="10" text-anchor="middle">Tom medio</text>
+                    </g>
+                  </g>
+
+                  <!-- NOTE 6: REDOBLANTE / CAJA (x=515, y=115 in Space 3, Stem UP) -->
+                  <g class="svg-note-group selected" data-name="Redoblante" tabindex="0" role="button" aria-label="Redoblante">
+                    <circle cx="515" cy="115" r="28" fill="#5729FF" fill-opacity="0" class="svg-note-target"/>
+                    <!-- Stem UP -->
+                    <line x1="525" y1="115" x2="525" y2="70" stroke="#220A63" stroke-width="3.5" stroke-linecap="round" class="svg-note-stem"/>
+                    <!-- Tilted Oval Notehead -->
+                    <ellipse cx="515" cy="115" rx="13" ry="9" transform="rotate(-20 515 115)" fill="#220A63" class="svg-note-head"/>
+                    <!-- Pill Tag -->
+                    <g class="note-pill-tag" transform="translate(515, 222)">
+                      <rect x="-36" y="-10" width="72" height="20" rx="10" fill="#220A63"/>
+                      <text x="0" y="4" fill="#FFFFFF" font-family="'Roboto', sans-serif" font-weight="800" font-size="10" text-anchor="middle">Redoblante</text>
+                    </g>
+                  </g>
+
+                  <!-- NOTE 7: TOM DE PISO (x=590, y=145 in Space 2, Stem UP) -->
+                  <g class="svg-note-group" data-name="Tom de piso" tabindex="0" role="button" aria-label="Tom de piso">
+                    <circle cx="590" cy="145" r="28" fill="#5729FF" fill-opacity="0" class="svg-note-target"/>
+                    <!-- Stem UP -->
+                    <line x1="600" y1="145" x2="600" y2="100" stroke="#220A63" stroke-width="3.5" stroke-linecap="round" class="svg-note-stem"/>
+                    <!-- Tilted Oval Notehead -->
+                    <ellipse cx="590" cy="145" rx="13" ry="9" transform="rotate(-20 590 145)" fill="#220A63" class="svg-note-head"/>
+                    <!-- Pill Tag -->
+                    <g class="note-pill-tag" transform="translate(590, 222)">
+                      <rect x="-35" y="-10" width="70" height="20" rx="10" fill="#220A63"/>
+                      <text x="0" y="4" fill="#FFFFFF" font-family="'Roboto', sans-serif" font-weight="800" font-size="10" text-anchor="middle">Tom de piso</text>
+                    </g>
+                  </g>
+
+                  <!-- NOTE 8: BOMBO (x=665, y=175 in Space 1, Stem DOWN) -->
+                  <g class="svg-note-group" data-name="Bombo" tabindex="0" role="button" aria-label="Bombo">
+                    <circle cx="665" cy="175" r="28" fill="#5729FF" fill-opacity="0" class="svg-note-target"/>
+                    <!-- Stem DOWN (Feet notes stem downwards) -->
+                    <line x1="655" y1="175" x2="655" y2="220" stroke="#220A63" stroke-width="3.5" stroke-linecap="round" class="svg-note-stem"/>
+                    <!-- Tilted Oval Notehead -->
+                    <ellipse cx="665" cy="175" rx="13" ry="9" transform="rotate(-20 665 175)" fill="#220A63" class="svg-note-head"/>
+                    <!-- Pill Tag -->
+                    <g class="note-pill-tag" transform="translate(665, 252)">
+                      <rect x="-28" y="-10" width="56" height="20" rx="10" fill="#220A63"/>
+                      <text x="0" y="4" fill="#FFFFFF" font-family="'Roboto', sans-serif" font-weight="800" font-size="10" text-anchor="middle">Bombo</text>
+                    </g>
+                  </g>
+
+                  <!-- NOTE 9: HI-HAT CON PEDAL (x=740, y=205 below Line 1, Stem DOWN) -->
+                  <g class="svg-note-group" data-name="Hi-hat con pedal" tabindex="0" role="button" aria-label="Hi-hat con pedal">
+                    <circle cx="740" cy="205" r="28" fill="#5729FF" fill-opacity="0" class="svg-note-target"/>
+                    <!-- Stem DOWN -->
+                    <line x1="730" y1="205" x2="730" y2="250" stroke="#220A63" stroke-width="3.5" stroke-linecap="round" class="svg-note-stem"/>
+                    <!-- X notehead -->
+                    <line x1="730" y1="195" x2="750" y2="215" stroke="#220A63" stroke-width="4.5" stroke-linecap="round" class="svg-note-head"/>
+                    <line x1="730" y1="215" x2="750" y2="195" stroke="#220A63" stroke-width="4.5" stroke-linecap="round" class="svg-note-head"/>
+                    <!-- Pill Tag -->
+                    <g class="note-pill-tag" transform="translate(740, 275)">
+                      <rect x="-32" y="-10" width="64" height="20" rx="10" fill="#220A63"/>
+                      <text x="0" y="4" fill="#FFFFFF" font-family="'Roboto', sans-serif" font-weight="800" font-size="10" text-anchor="middle">HH Pedal</text>
+                    </g>
+                  </g>
+                </svg>
+              </div>
+
+              <!-- QUICK ACCESS CHIPS -->
+              <div class="staff-quick-chips">
+                <button class="quick-chip" data-name="Crash">💥 Crash</button>
+                <button class="quick-chip" data-name="Ride">✨ Ride</button>
+                <button class="quick-chip" data-name="Hi-hat">✕ Hi-hat</button>
+                <button class="quick-chip" data-name="Tom agudo">🥁 Tom 1</button>
+                <button class="quick-chip" data-name="Tom medio">🥁 Tom 2</button>
+                <button class="quick-chip selected" data-name="Redoblante">🥁 Redoblante</button>
+                <button class="quick-chip" data-name="Tom de piso">🥁 Tom piso</button>
+                <button class="quick-chip" data-name="Bombo">🦶 Bombo</button>
+                <button class="quick-chip" data-name="Hi-hat con pedal">🦶 HH Pedal</button>
+              </div>
+            </article>
+
+            <!-- DRUM KIT VISUALIZER CARD -->
+            <article class="drum-kit-card">
+              <div class="drum-kit-header">
+                <div>
+                  <h3>🥁 Diagrama interactivo del set acústico</h3>
+                  <p>Toca cualquier tambor o plato para conectarlo al instante con el pentagrama.</p>
+                </div>
+              </div>
+              <div class="drum-kit-svg-wrap">
+                <!-- Drum Kit Overview SVG is embedded here -->
+                <object id="drumKitObject" type="image/svg+xml" data="assets/drum-kit-overview.svg" class="drum-kit-svg"></object>
+              </div>
+            </article>
+          </div>
+
+          <!-- RIGHT COLUMN: INSTRUMENT EXPLORER PANEL -->
+          <aside class="info-panel">
+            <div class="info-panel-top">
+              <span id="infoCategory" class="info-category-badge">Tambor principal</span>
+              <button id="infoPlayBtn" class="audio-play-btn" aria-label="Escuchar instrumento">
+                <span>▶</span> Escuchar sonido
+              </button>
+            </div>
+
+            <!-- ILLUSTRATION DISPLAY -->
+            <div class="info-img-container">
+              <img id="infoImage" class="info-img" src="assets/instrument-snare.svg" alt="Redoblante" />
+            </div>
+
+            <h3 id="infoName">Redoblante (Caja)</h3>
+            <p id="infoDesc">El tambor medular del ritmo. Produce un chasquido cortante gracias a sus bordones metálicos inferiores. Marca los tiempos 2 y 4 en el compás habitual de 4/4.</p>
+
+            <div class="info-specs-grid">
+              <div class="spec-box">
+                <span class="spec-label">Posición</span>
+                <span id="infoPosition" class="spec-value">3er Espacio (Do)</span>
+              </div>
+              <div class="spec-box">
+                <span class="spec-label">Extremidad</span>
+                <span id="infoLimb" class="spec-value">Mano izquierda</span>
+              </div>
+              <div class="spec-box">
+                <span class="spec-label">Cabeza de nota</span>
+                <span id="infoHeadType" class="spec-value">Normal (redonda)</span>
+              </div>
+              <div class="spec-box">
+                <span class="spec-label">Plica (Stem)</span>
+                <span id="infoStemDir" class="spec-value">Hacia arriba</span>
+              </div>
+            </div>
+
+            <div class="tip">
+              <strong>💡 Regla de oro para lectura de batería:</strong>
+              <span>Arriba de la 3ª línea = Platos y agudos (manos).<br>Abajo de la 3ª línea = Tambores graves y bombo (pies).</span>
+            </div>
+          </aside>
+        </div>
+
+        <!-- NOTATION GUIDE / LEGEND -->
+        <div class="legend">
+          <div class="legend-card">
+            <div class="legend-icon-wrap"><img src="assets/symbol-normal.svg" alt="Cabeza normal" /></div>
+            <div class="legend-info"><b>Cabeza normal</b><small>Tambores, bombo y toms</small></div>
+          </div>
+          <div class="legend-card">
+            <div class="legend-icon-wrap"><img src="assets/symbol-cross.svg" alt="Cabeza en X" /></div>
+            <div class="legend-info"><b>Cabeza en X</b><small>Platos, hi-hat y percusión metálica</small></div>
+          </div>
+          <div class="legend-card">
+            <div class="legend-icon-wrap"><img src="assets/symbol-accent.svg" alt="Acento" /></div>
+            <div class="legend-info"><b>Acento ( &gt; )</b><small>Tocar con mayor fuerza y velocidad</small></div>
+          </div>
+          <div class="legend-card">
+            <div class="legend-icon-wrap"><img src="assets/symbol-ghost.svg" alt="Nota fantasma" /></div>
+            <div class="legend-info"><b>Nota fantasma ( ● )</b><small>Golpe suave a pocos cm del parche</small></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: SÍMBOLOS Y ARTICULACIONES -->
+      <section id="simbolos" class="section" role="tabpanel">
+        <div class="section-title">
+          <span class="step">2</span>
+          <div>
+            <h2>Símbolos frecuentes y articulaciones</h2>
+            <p>Conoce los signos especiales que le dan dinámica, emoción y expresividad a la partitura.</p>
+          </div>
+        </div>
+
+        <div class="symbols-grid">
+          <!-- CARD 1 -->
+          <article class="learn-card">
+            <div class="symbol-preview-wrap">
+              <span class="symbol-badge">Básica</span>
+              <img src="assets/symbol-normal.svg" alt="Nota normal" class="symbol-svg" />
+            </div>
+            <h3>Nota normal (Cabeza redonda)</h3>
+            <p>Indica un golpe pleno en el parche. Utilizada principalmente en el bombo, redoblante y todos los toms.</p>
+            <div class="learn-card-action">
+              <button class="btn-sound-preview" data-sound="Redoblante"><span>▶</span> Probar golpe normal</button>
+            </div>
+          </article>
+
+          <!-- CARD 2 -->
+          <article class="learn-card">
+            <div class="symbol-preview-wrap">
+              <span class="symbol-badge">Metales</span>
+              <img src="assets/symbol-cross.svg" alt="Cabeza en X" class="symbol-svg" />
+            </div>
+            <h3>Cabeza en X (Platos)</h3>
+            <p>Distingue de inmediato las partes metálicas: hi-hat, platos crash y ride, campana o baqueta al aro (cross-stick).</p>
+            <div class="learn-card-action">
+              <button class="btn-sound-preview" data-sound="Hi-hat"><span>▶</span> Probar plato en X</button>
+            </div>
+          </article>
+
+          <!-- CARD 3 -->
+          <article class="learn-card">
+            <div class="symbol-preview-wrap">
+              <span class="symbol-badge">Dinámica fuerte</span>
+              <img src="assets/symbol-accent.svg" alt="Acento" class="symbol-svg" />
+            </div>
+            <h3>Acento ( &gt; )</h3>
+            <p>Se toca con mayor velocidad de muñeca para destacar la nota sobre el resto del compás. Clave en funk y rock.</p>
+            <div class="learn-card-action">
+              <button class="btn-sound-preview" data-sound="accent"><span>▶</span> Probar acento potente</button>
+            </div>
+          </article>
+
+          <!-- CARD 4 -->
+          <article class="learn-card">
+            <div class="symbol-preview-wrap">
+              <span class="symbol-badge">Dinámica suave</span>
+              <img src="assets/symbol-ghost.svg" alt="Nota fantasma" class="symbol-svg" />
+            </div>
+            <h3>Nota fantasma (Ghost note)</h3>
+            <p>Se escribe entre paréntesis (●). Se toca apenas rozando el redoblante para crear un groove fluido y continuo.</p>
+            <div class="learn-card-action">
+              <button class="btn-sound-preview" data-sound="ghost"><span>▶</span> Probar nota fantasma</button>
+            </div>
+          </article>
+
+          <!-- CARD 5 -->
+          <article class="learn-card">
+            <div class="symbol-preview-wrap">
+              <span class="symbol-badge">Hi-hat</span>
+              <img src="assets/symbol-open.svg" alt="Hi-hat abierto" class="symbol-svg" />
+            </div>
+            <h3>Hi-hat abierto ( ○ )</h3>
+            <p>El círculo sobre la nota indica soltar el pedal del pie izquierdo para que los platillos vibren libremente con sonido largo.</p>
+            <div class="learn-card-action">
+              <button class="btn-sound-preview" data-sound="hh-open"><span>▶</span> Probar hi-hat abierto</button>
+            </div>
+          </article>
+
+          <!-- CARD 6 -->
+          <article class="learn-card">
+            <div class="symbol-preview-wrap">
+              <span class="symbol-badge">Hi-hat</span>
+              <img src="assets/symbol-closed.svg" alt="Hi-hat cerrado" class="symbol-svg" />
+            </div>
+            <h3>Hi-hat cerrado ( + )</h3>
+            <p>La cruz sobre la nota indica pisar firmemente el pedal para cerrar los platos, apagando la resonancia en seco.</p>
+            <div class="learn-card-action">
+              <button class="btn-sound-preview" data-sound="hh-closed"><span>▶</span> Probar hi-hat cerrado</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- SECTION 3: PRÁCTICA INTERACTIVA -->
+      <section id="practica" class="section" role="tabpanel">
+        <div class="section-title">
+          <span class="step">3</span>
+          <div>
+            <h2>Niveles de entrenamiento</h2>
+            <p>Lee una nota a la vez en el pentagrama. Identifica la posición de memoria y sube de nivel.</p>
+          </div>
+        </div>
+
+        <!-- ROADMAP -->
+        <div class="level-roadmap" id="levelRoadmap" aria-label="Niveles de práctica"></div>
+
+        <div class="exercise-wrapper">
+          <article class="exercise-card">
+            <div class="exercise-heading">
+              <div>
+                <span id="levelKicker" class="exercise-kicker">Nivel 1 · Fundamentos</span>
+                <h3 id="exerciseTitle">¿Qué instrumento representa esta nota?</h3>
+              </div>
+              <div class="exercise-badges">
+                <span id="streakBadge" class="streak-pill">🔥 Racha: 0</span>
+                <span id="exerciseCounter" class="exercise-counter">Nota 1 de 3</span>
+              </div>
+            </div>
+
+            <p id="exerciseInstruction" class="exercise-instruction">Observa la posición de la nota en el pentagrama y elige el instrumento correcto.</p>
+
+            <!-- SVG EXERCISE MEASURE DISPLAY -->
+            <div class="exercise-staff-box">
+              <svg id="exerciseSvgStaff" class="exercise-svg" viewBox="0 0 540 220" xmlns="http://www.w3.org/2000/svg">
+                <!-- 5 Lines -->
+                <g stroke="#220A63" stroke-width="2">
+                  <line x1="20" y1="50" x2="520" y2="50"/>
+                  <line x1="20" y1="80" x2="520" y2="80"/>
+                  <line x1="20" y1="110" x2="520" y2="110"/>
+                  <line x1="20" y1="140" x2="520" y2="140"/>
+                  <line x1="20" y1="170" x2="520" y2="170"/>
+                </g>
+                <!-- Bar lines -->
+                <line x1="20" y1="50" x2="20" y2="170" stroke="#220A63" stroke-width="3"/>
+                <line x1="514" y1="50" x2="514" y2="170" stroke="#220A63" stroke-width="2"/>
+                <line x1="520" y1="50" x2="520" y2="170" stroke="#220A63" stroke-width="4.5"/>
+                <!-- Neutral Clef -->
+                <rect x="36" y="60" width="5.5" height="100" fill="#220A63" rx="1.5"/>
+                <rect x="47" y="60" width="5.5" height="100" fill="#220A63" rx="1.5"/>
+                <!-- 4/4 -->
+                <text x="72" y="100" fill="#220A63" font-family="'Roboto', sans-serif" font-weight="900" font-size="32">4</text>
+                <text x="72" y="160" fill="#220A63" font-family="'Roboto', sans-serif" font-weight="900" font-size="32">4</text>
+
+                <!-- DYNAMIC NOTE PLACEHOLDER -->
+                <g id="exerciseNoteMount"></g>
+              </svg>
+            </div>
+
+            <!-- MULTIPLE CHOICE OPTIONS -->
+            <div id="quizOptions" class="quiz-options"></div>
+
+            <!-- DETAILED FEEDBACK BOX -->
+            <div id="quizFeedbackBox" class="feedback-box">
+              <div class="feedback-thumb">
+                <img id="feedbackImg" src="assets/instrument-snare.svg" alt="Instrumento acertado" />
+              </div>
+              <div class="feedback-text">
+                <h4 id="feedbackTitle">¡Correcto!</h4>
+                <p id="feedbackDesc">El redoblante se escribe en el tercer espacio.</p>
+              </div>
+            </div>
+
+            <!-- EXERCISE FOOTER -->
+            <div class="exercise-footer">
+              <span id="quizScore" class="score-tally">Aciertos: 0 / 0</span>
+              <button id="nextExercise" class="primary-btn" disabled>
+                <span>Siguiente nota</span> ➔
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+      <span>Musicala · Vida, alma y música</span>
+      <span>Guía interactiva de lectura de batería y notación rítmica</span>
+    </footer>
+  </div>
+
+  <script src="script.js?v=2.0"></script>
+</body>
+</html>
